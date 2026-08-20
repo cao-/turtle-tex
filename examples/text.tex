@@ -1,0 +1,17 @@
+\load[turtle]
+
+Turtle graphics can be embedded directly in normal OpTeX text.\par
+The drawing starts at the current TeX position and uses the current
+pen state.\par
+
+\def\square#1 {\repeat 4 {\forward #1 \right 90 }}
+\def\flower#1 #2 {\repeat 36 {\right #1 \square #2 }}
+
+\begturtle
+\square 45
+The document continues normally after the drawing.\par
+\penup \right 90 \forward 100 \pendown
+\flower 15 20
+\endturtle
+
+\bye

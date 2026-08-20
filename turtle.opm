@@ -1,0 +1,100 @@
+\_codedecl \_turtle_loaded {Turtle graphics for OpTeX <2026-08-20>}
+
+\_namespace{turtle}
+
+\_doc
+This package provides the basic state and movement primitives for Logo-like
+Turtle graphics. The turtle starts at the current TeX position and points
+upward. Distances are measured in TeX points.
+\_cod
+
+\_def\.pos{(0.000 0.000)}
+\_def\.angle{0}
+
+\_def\.vecx#1{\_ea\.vecxA#1}
+\_def\.vecxA(#1 #2){#1}
+\_def\.vecy#1{\_ea\.vecyA#1}
+\_def\.vecyA(#1 #2){#2}
+\_def\.scalev#1#2{(\expr{#1 * \.vecx#2} \expr{#1 * \.vecy#2})}
+\_def\.sumv#1#2{(\expr{\.vecx#1 + \.vecx#2} \expr{\.vecy#1 + \.vecy#2})}
+
+\_newifi\_ifturtle_pendown
+\_def\.turtlepenup{\_turtle_pendownfalse}
+\_def\.turtlependown{\_turtle_pendowntrue}
+\_def\.turtlepensize#1{\_edef\.pensizevalue{#1}}
+\_turtle_pendowntrue
+\.turtlepensize{1}
+
+\_doc
+The drawing backend is isolated in the internal drawsegment macro. It receives
+five arguments: start x, start y, end x, end y, and pen width. The default
+backend uses the ordinary OpTeX pdfliteral whatsit. A replacement backend
+can be installed with turtlebackend followed by its macro name.
+\_cod
+
+\_def\.drawsegment#1#2#3#4#5{%
+   \_pdfliteral{q 0 J #5 w #1 #2 m #3 #4 l S Q}}
+\_def\.turtlebackend#1{\_let\.drawsegment=#1}
+
+\_doc
+The movement commands are available inside begturtle and use a
+space-delimited argument. For example, write forward 40 followed by a space.
+The short names forward, backward, right, left, penup, pendown, pensize,
+repeat, and backend are local to the begturtle scope.
+\_cod
+
+\_def\.turtleforward#1 {%
+   \_let\.startpos\.pos
+   \_edef\.displacement{\.scalev{#1}{(\_sin{\.angle} \_cos{\.angle})}}%
+   \_edef\.pos{\.sumv\.pos\.displacement}%
+   \_ifturtle_pendown
+      \.drawsegment
+         {\expr{\.vecx\.startpos}}
+         {\expr{\.vecy\.startpos}}
+         {\expr{\.vecx\.pos}}
+         {\expr{\.vecy\.pos}}
+         {\.pensizevalue}%
+   \_fi
+}
+
+\_def\.turtlebackward#1 {\.turtleforward -#1 }
+\_def\.turtleright#1 {%
+   \_edef\.angle{\expr{\.angle + #1}}}
+\_def\.turtleleft#1 {\.turtleright -#1 }
+\_def\.turtlerepeat#1 #2{\_fornum 1..#1 \_do{#2}}
+
+\_doc
+The begturtle and endturtle commands open and close a local turtle scope.
+Inside the scope, short names are available for the turtle primitives. The
+original meanings of these names are restored by endturtle.
+\_cod
+
+\_def\.begturtle{\_begingroup
+   \_let\forward\.turtleforward
+   \_let\backward\.turtlebackward
+   \_let\right\.turtleright
+   \_let\left\.turtleleft
+   \_let\penup\.turtlepenup
+   \_let\pendown\.turtlependown
+   \_let\pensize\.turtlepensize
+   \_let\backend\.turtlebackend
+   \_let\repeat\.turtlerepeat}
+\_def\.endturtle{\_endgroup}
+
+\_nspublic \begturtle \endturtle ;
+
+\_endnamespace
+\_endcode
+
+\_doc
+Higher-level drawings belong in user documents or separate example files.
+For example:
+\begtt
+\load[turtle]
+\begturtle
+\def\square#1 {\repeat 4 {\forward #1 \right 90 }}
+\square 60
+\endturtle
+\endtt
+\_cod
+\endinput
