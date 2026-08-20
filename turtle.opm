@@ -8,9 +8,6 @@ Turtle graphics. The turtle starts at the current TeX position and points
 upward. Distances are measured in TeX points.
 \_cod
 
-\_def\.pos{(0.000 0.000)}
-\_def\.angle{0}
-
 \_def\.vecx#1{\_ea\.vecxA#1}
 \_def\.vecxA(#1 #2){#1}
 \_def\.vecy#1{\_ea\.vecyA#1}
@@ -22,9 +19,6 @@ upward. Distances are measured in TeX points.
 \_def\.turtlepenup{\_turtle_pendownfalse}
 \_def\.turtlependown{\_turtle_pendowntrue}
 \_def\.turtlepensize#1{\_edef\.pensizevalue{#1}}
-\_turtle_pendowntrue
-\.turtlepensize{1}
-
 \_doc
 The drawing backend is isolated in the internal drawsegment macro. It receives
 five arguments: start x, start y, end x, end y, and pen width. The default
@@ -33,7 +27,7 @@ can be installed with turtlebackend followed by its macro name.
 \_cod
 
 \_def\.drawsegment#1#2#3#4#5{%
-   \_pdfliteral{q 0 J #5 w #1 #2 m #3 #4 l S Q}}
+   \_pdfliteral{q 1 J #5 w #1 #2 m #3 #4 l S Q}}
 \_def\.turtlebackend#1{\_let\.drawsegment=#1}
 
 \_doc
@@ -66,10 +60,16 @@ repeat, and backend are local to the begturtle scope.
 \_doc
 The begturtle and endturtle commands open and close a local turtle scope.
 Inside the scope, short names are available for the turtle primitives. The
-original meanings of these names are restored by endturtle.
+Each begturtle starts at position (0,0), points upward, and resets the pen to
+down with width 1. The original meanings of the short names are restored by
+endturtle.
 \_cod
 
 \_def\.begturtle{\_begingroup
+   \_def\.pos{(0.000 0.000)}
+   \_def\.angle{0}
+   \_turtle_pendowntrue
+   \.turtlepensize{1}
    \_let\forward\.turtleforward
    \_let\backward\.turtlebackward
    \_let\right\.turtleright
