@@ -33,7 +33,7 @@ can be installed with backend followed by its macro name.
 \_doc
 The movement commands are available inside begturtle and use a
 space-delimited argument. For example, write forward 40 followed by a space.
-The short names forward, backward, right, left, penup, pendown, pensize,
+The short names forward, back, right, left, penup, pendown, pensize,
 repeat, and backend are local to the begturtle scope.
 \_cod
 
@@ -51,7 +51,7 @@ repeat, and backend are local to the begturtle scope.
    \_fi
 }
 
-\_def\.backward#1 {\.forward -#1 }
+\_def\.back#1 {\.forward -#1 }
 \_def\.right#1 {%
    \_edef\.angle{\expr{\.angle + #1}}}
 \_def\.left#1 {\.right -#1 }
@@ -71,7 +71,7 @@ endturtle.
    \_turtle_pendowntrue
    \.pensize{1}
    \_let\forward\.forward
-   \_let\backward\.backward
+   \_let\back\.back
    \_let\right\.right
    \_let\left\.left
    \_let\penup\.penup

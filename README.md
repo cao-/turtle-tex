@@ -23,7 +23,7 @@ package:
 The turtle starts at the current TeX position and initially points upward.
 Distances and coordinates are in TeX points. The package exposes only the
 `\begturtle` and `\endturtle` scope commands. Inside that scope, the short
-names `\forward`, `\backward`, `\right`, `\left`, `\penup`, `\pendown`,
+names `\forward`, `\back`, `\right`, `\left`, `\penup`, `\pendown`,
 `\pensize`, `\repeat`, and `\backend` are available.
 
 For a local drawing scope, use the OpTeX-style environment:
