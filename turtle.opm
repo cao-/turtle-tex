@@ -16,19 +16,19 @@ upward. Distances are measured in TeX points.
 \_def\.sumv#1#2{\expr{\.vecx#1 + \.vecx#2} \expr{\.vecy#1 + \.vecy#2} }
 
 \_newifi\_ifturtle_pendown
-\_def\.turtlepenup{\_turtle_pendownfalse}
-\_def\.turtlependown{\_turtle_pendowntrue}
-\_def\.turtlepensize#1{\_edef\.pensizevalue{#1}}
+\_def\.penup{\_turtle_pendownfalse}
+\_def\.pendown{\_turtle_pendowntrue}
+\_def\.pensize#1{\_edef\.pensizevalue{#1}}
 \_doc
 The drawing backend is isolated in the internal drawsegment macro. It receives
 five arguments: start x, start y, end x, end y, and pen width. The default
 backend uses the ordinary OpTeX pdfliteral whatsit. A replacement backend
-can be installed with turtlebackend followed by its macro name.
+can be installed with backend followed by its macro name.
 \_cod
 
 \_def\.drawsegment#1#2#3#4#5{%
    \_pdfliteral{q 1 J #5 w #1 #2 m #3 #4 l S Q}}
-\_def\.turtlebackend#1{\_let\.drawsegment=#1}
+\_def\.backend#1{\_let\.drawsegment=#1}
 
 \_doc
 The movement commands are available inside begturtle and use a
@@ -37,7 +37,7 @@ The short names forward, backward, right, left, penup, pendown, pensize,
 repeat, and backend are local to the begturtle scope.
 \_cod
 
-\_def\.turtleforward#1 {%
+\_def\.forward#1 {%
    \_let\.startpos\.pos
    \_edef\.displacement{\.scalev{#1}{\_sin{\.angle} \_cos{\.angle} }}%
    \_edef\.pos{\.sumv\.pos\.displacement}%
@@ -51,11 +51,11 @@ repeat, and backend are local to the begturtle scope.
    \_fi
 }
 
-\_def\.turtlebackward#1 {\.turtleforward -#1 }
-\_def\.turtleright#1 {%
+\_def\.backward#1 {\.forward -#1 }
+\_def\.right#1 {%
    \_edef\.angle{\expr{\.angle + #1}}}
-\_def\.turtleleft#1 {\.turtleright -#1 }
-\_def\.turtlerepeat#1 #2{\_fornum 1..#1 \_do{#2}}
+\_def\.left#1 {\.right -#1 }
+\_def\.repeat#1 #2{\_fornum 1..#1 \_do{#2}}
 
 \_doc
 The begturtle and endturtle commands open and close a local turtle scope.
@@ -69,16 +69,16 @@ endturtle.
    \_def\.pos{0.000 0.000 }
    \_def\.angle{0}
    \_turtle_pendowntrue
-   \.turtlepensize{1}
-   \_let\forward\.turtleforward
-   \_let\backward\.turtlebackward
-   \_let\right\.turtleright
-   \_let\left\.turtleleft
-   \_let\penup\.turtlepenup
-   \_let\pendown\.turtlependown
-   \_let\pensize\.turtlepensize
-   \_let\backend\.turtlebackend
-   \_let\repeat\.turtlerepeat}
+   \.pensize{1}
+   \_let\forward\.forward
+   \_let\backward\.backward
+   \_let\right\.right
+   \_let\left\.left
+   \_let\penup\.penup
+   \_let\pendown\.pendown
+   \_let\pensize\.pensize
+   \_let\backend\.backend
+   \_let\repeat\.repeat}
 \_def\.endturtle{\_endgroup}
 
 \_nspublic \begturtle \endturtle ;
