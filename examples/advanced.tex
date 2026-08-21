@@ -1,9 +1,9 @@
 \load[turtle]
-\def\arrow{\fornum 0..360 \do{\pensize{\expr{10*\_sin{##1}}}\forward 0.5 \right \_sin{1.5*##1}}} 
+\def\stroke{\fornum 0..360 \do{\pensize{\expr{10*\_sin{##1}}}\forward 0.5 \right \_sin{1.5*##1}}} 
 
 \begturtle
 \penup \right 90 \forward 100 \pendown
-\arrow
+\stroke
 \endturtle
 
 \bye
