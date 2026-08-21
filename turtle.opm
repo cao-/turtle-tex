@@ -20,21 +20,15 @@ upward. Distances are measured in TeX points.
 \_def\.pendown{\_turtle_pendowntrue}
 \_def\.pensize#1{\_edef\.pensizevalue{#1}}
 \_doc
-The drawing backend is isolated in the internal drawsegment macro. It receives
-five arguments: start x, start y, end x, end y, and pen width. The default
-backend uses the ordinary OpTeX pdfliteral whatsit. A replacement backend
-can be installed with backend followed by its macro name.
+The drawing macro receives five arguments: start x, start y, end x, end y, and pen width.
 \_cod
-
 \_def\.drawsegment#1#2#3#4#5{%
-   \_pdfliteral{q 1 J #5 w #1 #2 m #3 #4 l S Q}}
-\_def\.backend#1{\_let\.drawsegment=#1}
-
+   \_pdfliteral{q \.pencapvalue\_space J #5 w #1 #2 m #3 #4 l S Q}}
 \_doc
 The movement commands are available inside begturtle and use a
 space-delimited argument. For example, write forward 40 followed by a space.
 The short names forward, back, right, left, penup, pendown, pensize,
-repeat, and backend are local to the begturtle scope.
+repeat, and back are local to the begturtle scope.
 \_cod
 
 \_def\.forward#1 {%
@@ -71,10 +65,6 @@ endturtle.
 \_cod
 
 \_def\.begturtle{\_begingroup
-   \_def\.pos{0 0 }
-   \_def\.angle{0}
-   \_turtle_pendowntrue
-   \.pensize{1}
    \_let\forward\.forward
    \_let\back\.back
    \_let\right\.right
@@ -82,9 +72,16 @@ endturtle.
    \_let\penup\.penup
    \_let\pendown\.pendown
    \_let\pensize\.pensize
-   \_let\backend\.backend
    \_let\repeat\.repeat
    \_let\text\.text
+   \_def\squarepen{\def\.pencapvalue{0}}
+   \_def\roundpen{\def\.pencapvalue{1}}
+   \_def\projectingpen{\def\.pencapvalue{2}}
+   \_def\.pos{0 0 }
+   \_def\.angle{0}
+   \pendown
+   \roundpen
+   \pensize 1
 }
 \_def\.endturtle{\_endgroup}
 
