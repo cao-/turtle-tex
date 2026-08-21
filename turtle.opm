@@ -71,7 +71,7 @@ endturtle.
 \_cod
 
 \_def\.begturtle{\_begingroup
-   \_def\.pos{0.000 0.000 }
+   \_def\.pos{0 0 }
    \_def\.angle{0}
    \_turtle_pendowntrue
    \.pensize{1}
@@ -83,8 +83,9 @@ endturtle.
    \_let\pendown\.pendown
    \_let\pensize\.pensize
    \_let\backend\.backend
-   \_let\repeat\.repeat}
+   \_let\repeat\.repeat
    \_let\text\.text
+}
 \_def\.endturtle{\_endgroup}
 
 \_nspublic \begturtle \endturtle ;
