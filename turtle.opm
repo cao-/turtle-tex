@@ -57,6 +57,11 @@ repeat, and backend are local to the begturtle scope.
 \_def\.left#1 {\.right -#1 }
 \_def\.repeat#1 #2{\_fornum 1..#1 \_do{#2}}
 
+
+\_def\.text#1{%
+   \puttext \.vecx\.pos pt \.vecy\.pos pt {#1}%
+}
+
 \_doc
 The begturtle and endturtle commands open and close a local turtle scope.
 Inside the scope, short names are available for the turtle primitives. The
@@ -79,6 +84,7 @@ endturtle.
    \_let\pensize\.pensize
    \_let\backend\.backend
    \_let\repeat\.repeat}
+   \_let\text\.text
 \_def\.endturtle{\_endgroup}
 
 \_nspublic \begturtle \endturtle ;

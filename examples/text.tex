@@ -16,7 +16,13 @@ The document continues normally after the drawing.
 \endturtle
 
 \bigskip
-A\begturtle \right 90 \forward 100 \right 90 b
+\begturtle
+\text{\llap A} \right 90 \forward 100
+\text B \right 90 \forward 100
+\text C \right 90 \forward 100
+\text{\llap D} \right 90 \forward 100
 \endturtle
+ 
+\puttext 10pt 20pt {text}
 
 \bye
