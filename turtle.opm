@@ -18,7 +18,7 @@ upward. Distances are measured in TeX points.
 \_newifi\_ifturtle_pendown
 \_def\.penup{\_turtle_pendownfalse}
 \_def\.pendown{\_turtle_pendowntrue}
-\_def\.pensize#1{\_edef\.pensizevalue{#1}}
+\_def\.pensize#1 {\_edef\.pensizevalue{#1}}
 \_doc
 The drawing macro receives five arguments: start x, start y, end x, end y, and pen width.
 \_cod
@@ -47,17 +47,10 @@ repeat, and back are local to the begturtle scope.
 
 \_def\.back#1 {\.forward -#1 }
 \_def\.right#1 {%
-   \_edef\.angle{\expr{\.angle - #1}}}
+   \_edef\.angle{\_expr{\.angle - #1}}}
 \_def\.left#1 {\.right -#1 }
 \_def\.repeat#1 #2{\_fornum 1..#1 \_do{#2}}
 
-%% instead of providing these macros, should we directly expose directly posx, posy and angle?
-\_def\.text#1{%
-   \_puttext \.vecx\.pos pt \.vecy\.pos pt {#1}%
-}
-\_def\.rotatedtext#1{%
-   \_puttext \.vecx\.pos pt \.vecy\.pos pt {\_rotbox{\.angle}{#1}}%
-}
 
 \_doc
 The begturtle and endturtle commands open and close a local turtle scope.
@@ -76,16 +69,17 @@ endturtle.
    \_let\pendown\.pendown
    \_let\pensize\.pensize
    \_let\repeat\.repeat
-   \_let\text\.text
-   \_let\rotatedtext\.rotatedtext
    \_def\squarepen{\def\.pencapvalue{0}}
    \_def\roundpen{\def\.pencapvalue{1}}
    \_def\projectingpen{\def\.pencapvalue{2}}
    \_def\.pos{0 0 }
    \_def\.angle{90}
+   \_def\x{\.vecx\.pos}
+   \_def\y{\.vecy\.pos}
+   \_def\angle{\.angle}
    \pendown
    \roundpen
-   \pensize 1
+   \pensize 0.5 
 }
 \_def\.endturtle{\_endgroup}
 
