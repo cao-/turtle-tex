@@ -33,7 +33,7 @@ repeat, and back are local to the begturtle scope.
 
 \_def\.forward#1 {%
    \_let\.startpos\.pos
-   \_edef\.displacement{\.scalev{#1}{\_sin{\.angle} \_cos{\.angle} }}%
+   \_edef\.displacement{\.scalev{#1}{\_cos{\.angle} \_sin{\.angle} }}%
    \_edef\.pos{\.sumv\.pos\.displacement}%
    \_ifturtle_pendown
       \.drawsegment
@@ -47,13 +47,16 @@ repeat, and back are local to the begturtle scope.
 
 \_def\.back#1 {\.forward -#1 }
 \_def\.right#1 {%
-   \_edef\.angle{\expr{\.angle + #1}}}
+   \_edef\.angle{\expr{\.angle - #1}}}
 \_def\.left#1 {\.right -#1 }
 \_def\.repeat#1 #2{\_fornum 1..#1 \_do{#2}}
 
-
+%% instead of providing these macros, should we directly expose directly posx, posy and angle?
 \_def\.text#1{%
-   \puttext \.vecx\.pos pt \.vecy\.pos pt {#1}%
+   \_puttext \.vecx\.pos pt \.vecy\.pos pt {#1}%
+}
+\_def\.rotatedtext#1{%
+   \_puttext \.vecx\.pos pt \.vecy\.pos pt {\_rotbox{\.angle}{#1}}%
 }
 
 \_doc
@@ -74,11 +77,12 @@ endturtle.
    \_let\pensize\.pensize
    \_let\repeat\.repeat
    \_let\text\.text
+   \_let\rotatedtext\.rotatedtext
    \_def\squarepen{\def\.pencapvalue{0}}
    \_def\roundpen{\def\.pencapvalue{1}}
    \_def\projectingpen{\def\.pencapvalue{2}}
    \_def\.pos{0 0 }
-   \_def\.angle{0}
+   \_def\.angle{90}
    \pendown
    \roundpen
    \pensize 1
