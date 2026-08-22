@@ -18,21 +18,21 @@
 
 \def\fern#1 #2 {\ifnum\round{#1}<1\else
 \forward #1
-\right 70*#2 \fern \expr{#1*0.5} \expr{#2*-1} \left 70*#2
+\right 70*#2 \fern #1*0.5 #2*-1 \left 70*#2
 \forward #1
-\left 70*#2 \fern \expr{#1*0.5} #2 \right 70*#2
-\right 7*#2 \fern \expr{#1-1} #2 \left 7*#2
+\left 70*#2 \fern #1*0.5 #2 \right 70*#2
+\right 7*#2 \fern (#1-1) #2 \left 7*#2
 \penup \forward -#1*2 \pendown
 \fi}
 
 Recursive turtle drawings.\par
-\vskip 3in
-A tree\hfil
+\vskip 4in
+A tree
 \begturtle
 \tree 150
 \endturtle
 \vskip 3in
-A fern\hfil
+A fern
 \begturtle
 \fern 15 1
 \endturtle

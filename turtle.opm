@@ -12,8 +12,9 @@ upward. Distances are measured in TeX points.
 \_def\.vecxA#1 #2 {#1}
 \_def\.vecy#1{\_ea\.vecyA#1}
 \_def\.vecyA#1 #2 {#2}
-\_def\.scalev#1#2{\expr{#1 * \.vecx#2} \expr{#1 * \.vecy#2} }
-\_def\.sumv#1#2{\expr{\.vecx#1 + \.vecx#2} \expr{\.vecy#1 + \.vecy#2} }
+\_def\.scalev#1#2{\expr{#1*\.vecx#2} \expr{#1*\.vecy#2} }
+\_def\.sumv#1#2{\expr{\.vecx#1+\.vecx#2} \expr{\.vecy#1+\.vecy#2} }
+\_def\.dir{\_cos{\.angle} \_sin{\.angle} }
 
 \_newifi\_ifturtle_pendown
 \_def\.penup{\_turtle_pendownfalse}
@@ -33,22 +34,19 @@ repeat, and back are local to the begturtle scope.
 
 \_def\.forward#1 {%
    \_let\.startpos\.pos
-   \_edef\.displacement{\.scalev{#1}{\_cos{\.angle} \_sin{\.angle} }}%
-   \_edef\.pos{\.sumv\.pos\.displacement}%
+   \_edef\.pos{\.sumv\.pos{\.scalev{#1}\.dir}}%
    \_ifturtle_pendown
       \.drawsegment
-         {\expr{\.vecx\.startpos}}
-         {\expr{\.vecy\.startpos}}
-         {\expr{\.vecx\.pos}}
-         {\expr{\.vecy\.pos}}
+         {\.vecx\.startpos}
+         {\.vecy\.startpos}
+         {\.vecx\.pos}
+         {\.vecy\.pos}
          {\.pensizevalue}%
    \_fi
 }
-
-\_def\.back#1 {\.forward -#1 }
-\_def\.right#1 {%
-   \_edef\.angle{\_expr{\.angle - #1}}}
-\_def\.left#1 {\.right -#1 }
+\_def\.left#1 {\_edef\.angle{\_expr{\.angle+#1}}}
+\_def\.back#1 {\.forward -(#1) }
+\_def\.right#1 {\.left -(#1) }
 \_def\.repeat#1 #2{\_fornum 1..#1 \_do{#2}}
 
 
@@ -91,12 +89,13 @@ endturtle.
 \_doc
 Higher-level drawings belong in user documents or separate example files.
 For example:
-\begtt
+\_begtt
 \load[turtle]
 \begturtle
 \def\square#1 {\repeat 4 {\forward #1 \right 90 }}
 \square 60
 \endturtle
-\endtt
+\bye
+\_endtt
 \_cod
-\endinput
+\_endinput
