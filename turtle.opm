@@ -2,12 +2,6 @@
 
 \_namespace{turtle}
 
-\_doc
-This package provides the basic state and movement primitives for Logo-like
-Turtle graphics. The turtle starts at the current TeX position and points
-upward. Distances are measured in TeX points.
-\_cod
-
 \_def\.vecx#1{\_ea\.vecxA#1}
 \_def\.vecxA#1 #2 {#1}
 \_def\.vecy#1{\_ea\.vecyA#1}
@@ -20,17 +14,9 @@ upward. Distances are measured in TeX points.
 \_def\.penup{\_turtle_pendownfalse}
 \_def\.pendown{\_turtle_pendowntrue}
 \_def\.pensize#1 {\_edef\.pensizevalue{#1}}
-\_doc
-The drawing macro receives five arguments: start x, start y, end x, end y, and pen width.
-\_cod
+
 \_def\.drawsegment#1#2#3#4#5{%
    \_pdfliteral{q \.pencapvalue\_space J #5 w #1 #2 m #3 #4 l S Q}}
-\_doc
-The movement commands are available inside begturtle and use a
-space-delimited argument. For example, write forward 40 followed by a space.
-The short names forward, back, right, left, penup, pendown, pensize,
-repeat, and back are local to the begturtle scope.
-\_cod
 
 \_def\.forward#1 {%
    \_let\.startpos\.pos
@@ -49,15 +35,6 @@ repeat, and back are local to the begturtle scope.
 \_def\.right#1 {\.left -(#1) }
 \_def\.repeat#1 #2{\_fornum 1..#1 \_do{#2}}
 
-
-\_doc
-The begturtle and endturtle commands open and close a local turtle scope.
-Inside the scope, short names are available for the turtle primitives. The
-Each begturtle starts at position (0,0), points upward, and resets the pen to
-down with width 1. The original meanings of the short names are restored by
-endturtle.
-\_cod
-
 \_def\.begturtle{\_begingroup
    \_let\forward\.forward
    \_let\back\.back
@@ -72,9 +49,6 @@ endturtle.
    \_def\projectingpen{\def\.pencapvalue{2}}
    \_def\.pos{0 0 }
    \_def\.angle{90}
-   \_def\x{\.vecx\.pos}
-   \_def\y{\.vecy\.pos}
-   \_def\angle{\.angle}
    \pendown
    \roundpen
    \pensize 0.5 
@@ -85,17 +59,3 @@ endturtle.
 
 \_endnamespace
 \_endcode
-
-\_doc
-Higher-level drawings belong in user documents or separate example files.
-For example:
-\_begtt
-\load[turtle]
-\begturtle
-\def\square#1 {\repeat 4 {\forward #1 \right 90 }}
-\square 60
-\endturtle
-\bye
-\_endtt
-\_cod
-\_endinput
