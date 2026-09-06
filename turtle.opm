@@ -16,7 +16,7 @@
 \_def\.pensize#1 {\_edef\.pensizevalue{#1}}
 
 \_def\.drawsegment#1#2#3#4#5{%
-   \_pdfliteral{q \.pencapvalue\_space J #5 w #1 #2 m #3 #4 l S Q}}
+   \_pdfliteral {q \.pencapvalue\_space J #5 w #1 #2 m #3 #4 l S Q}}
 
 \_def\.forward#1 {%
    \_let\.startpos\.pos

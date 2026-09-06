@@ -1,0 +1,115 @@
+\load[turtle]
+\parindent=0pt
+
+Basic sequence of turtle movements
+\vskip 110pt
+\begturtle
+\forward 100
+\right 90
+\forward 150
+\left 45
+\back 100
+\left 45
+\penup
+\forward 100
+\endturtle
+
+\bigskip
+Squares and rectangles
+\def\squarepiece #1 {%
+    \forward #1
+    \right 90
+}
+\def\square #1 {%
+    \repeat 4 {%
+        \squarepiece #1
+    }
+}
+\def\rectangle #1 #2 {%
+    \repeat 2 {%
+        \squarepiece #1
+        \squarepiece #2
+    }
+}
+
+\vskip 110pt
+\line{%
+    \begturtle
+    \square 100
+    \endturtle
+    \hfill
+    \begturtle
+    \rectangle 100 50
+    \endturtle
+    \hfill
+}
+
+\bigskip
+Some things
+\def\thing{%
+    \forward 20
+    \right 90
+    \forward 20
+    \right 90
+    \forward 10
+    \right 90
+    \forward 10
+    \right 90
+    \forward 20
+    \right 90
+    \forward 5
+    \right 90
+    \forward 5
+    \right 90
+    \forward 10
+}
+\def\thingone{%
+    \repeat 4 
+        \thing
+}
+\def\thingtwo{%
+    \repeat 9 {%
+        \thing
+        \right 10
+        \forward 10
+    }
+}
+\def\thingthree{%
+    \repeat 8 {%
+        \thing
+        \left 45
+        \forward 20
+    }
+}
+\vskip 50pt
+\begturtle
+\line{%
+    \thing
+    \hfil
+    \thingone
+    \hfil
+    \thingtwo
+    \hfil
+    \thingthree
+    \hfil
+}
+\endturtle
+
+
+\bigskip
+A circle and arcs
+\def\circle #1 {%
+    \repeat 360 {%
+        \forward #1
+        \right 1
+    }
+}
+\vskip 70pt
+\begturtle
+\circle 1
+\endturtle
+
+
+
+
+\bye
