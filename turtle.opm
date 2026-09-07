@@ -10,8 +10,17 @@
 \_def\.sumv#1#2{\expr{\.vecx#1+\.vecx#2} \expr{\.vecy#1+\.vecy#2} }
 \_def\.dir{\_cos{\.angle} \_sin{\.angle} }
 
-\_def\.penup{\_def\.movecommand{m}}
-\_def\.pendown{\_def\.movecommand{l}}
+\_def\.strokecommand{S}
+\_def\.penup{%
+   \_def\.movecommand{m}%
+   \_pdfliteral{\.strokecommand}%
+   \_pdfliteral{Q}%
+}
+\_def\.pendown{%
+   \_def\.movecommand{l}%
+   \_pdfliteral{\.vecx\.pos\_space\.vecy\.pos\_space m}%
+   \_pdfliteral{q}%
+}
 \_def\.pencap#1{\_pdfliteral{#1 j #1 J}}
 \_def\.pensize#1 {\_pdfliteral{#1 w}}
 
@@ -39,17 +48,19 @@
    \_let\pendown\.pendown
    \_let\pensize\.pensize
    \_let\repeat\.repeat
-   \_def\squarepen{\.pencap{0}}
-   \_def\roundpen{\.pencap{1}}
-   \_def\projectingpen{\.pencap{2}}
-   \_def\.pos{0 0 }
-   \_pdfliteral{0 0 m}
-   \_def\.angle{90}
-   \pendown
+   \_def\squarepen{\.pencap{0}}%
+   \_def\roundpen{\.pencap{1}}%
+   \_def\projectingpen{\.pencap{2}}%
+   \_def\.pos{0 0 }%
+   \_def\.angle{90}%
    \roundpen
    \pensize 1 
+   \pendown
 }
-\_def\.endturtle{\_pdfliteral{S}\_endgroup}
+\_def\.endturtle{%
+   \.penup
+   \_endgroup
+}
 
 \_nspublic \begturtle \endturtle ;
 

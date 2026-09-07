@@ -10,8 +10,6 @@ Basic sequence of turtle movements
 \left 45
 \back 100
 \left 45
-\penup
-\forward 100
 \endturtle
 
 \bigskip
@@ -23,13 +21,13 @@ Squares and rectangles
 \def\square #1 {%
     \repeat 4 {%
         \squarepiece #1
-    }
+    }%
 }
 \def\rectangle #1 #2 {%
     \repeat 2 {%
         \squarepiece #1
         \squarepiece #2
-    }
+    }%
 }
 
 \vskip 110pt
@@ -37,11 +35,11 @@ Squares and rectangles
     \begturtle
         \square 100
     \endturtle
-    \hfill
+    \hfil
     \begturtle
         \rectangle 100 50
     \endturtle
-    \hfill
+    \hfil
 }
 
 \bigskip
@@ -72,14 +70,14 @@ Some things
         \thing
         \right 10
         \forward 10
-    }
+    }%
 }
 \def\thingthree{%
     \repeat 8 {%
         \thing
         \left 45
         \forward 20
-    }
+    }%
 }
 \vskip 50pt
 \line{%
@@ -108,7 +106,7 @@ A circle and arcs
     \repeat 360 {%
         \forward #1
         \right 1
-    }
+    }%
 }
 \vskip 70pt
 \begturtle
