@@ -1,16 +1,24 @@
 \load[turtle]
+\pdfcompresslevel=0
+\pdfobjcompresslevel=0
+
 \parindent=0pt
+
+
+\def\repeat#1 #2 {\fornum 1..#1 \do{#2}}
+
+\def\turtleline #1{\line{\foreach #1\do ##1, {\bturtle ##1 \eturtle \hfil}}}
 
 Basic sequence of turtle movements
 \vskip 110pt
-\begturtle
+\bturtle
 \forward 100
 \right 90
 \forward 150
 \left 45
 \back 100
 \left 45
-\endturtle
+\eturtle
 
 \bigskip
 Squares and rectangles
@@ -21,30 +29,21 @@ Squares and rectangles
 \def\square #1 {%
     \repeat 4 {%
         \squarepiece #1
-    }%
+    }
 }
 \def\rectangle #1 #2 {%
     \repeat 2 {%
         \squarepiece #1
         \squarepiece #2
-    }%
+    }
 }
 
 \vskip 110pt
-\line{%
-    \begturtle
-        \square 100
-    \endturtle
-    \hfil
-    \begturtle
-        \rectangle 100 50
-    \endturtle
-    \hfil
-}
+\turtleline{\square 100, \rectangle 100 50, }
 
 \bigskip
 Some things
-\def\thing{%
+\def\thing {%
     \forward 20
     \right 90
     \forward 20
@@ -61,56 +60,92 @@ Some things
     \right 90
     \forward 10
 }
-\def\thingone{%
+\def\thingone {%
     \repeat 4 
         \thing
 }
-\def\thingtwo{%
+\def\thingtwo {%
     \repeat 9 {%
         \thing
         \right 10
         \forward 10
-    }%
+    }
 }
-\def\thingthree{%
+\def\thingthree {%
     \repeat 8 {%
         \thing
         \left 45
         \forward 20
-    }%
+    }
 }
 \vskip 50pt
-\line{%
-    \begturtle
-        \thing
-    \endturtle
-    \hfil
-    \begturtle
-        \thingone
-    \endturtle
-    \hfil
-    \begturtle
-        \thingtwo
-    \endturtle
-    \hfil
-    \begturtle
-        \thingthree
-    \endturtle
-    \hfil
-}
-
+\turtleline{\thing, \thingone, \thingtwo, \thingthree, }
 
 \bigskip
-A circle and arcs
-\def\circle #1 {%
-    \repeat 360 {%
+Circles and arcs
+\def\arcr #1 #2 {%
+    \repeat #2 {%
         \forward #1
-        \right 1
-    }%
+        \right 1 
+    }
+}
+\def\arcl #1 #2 {%
+    \repeat #2 {%
+        \forward #1
+        \left 1 
+    }
+}
+\def\circles {%
+    \repeat 9 {%
+        \arcr 0.5 360
+        \right 40
+    }
+}
+\def\petal #1 {%
+    \repeat 2 {%
+        \arcr #1 60
+        \right 120
+    }
+}
+\def\flower #1 {%
+    \repeat 6 {%
+        \petal #1
+        \right 60
+    }
+}
+\def\ray #1 {%
+    \repeat 2 {%
+        \arcl #1 90
+        \arcr #1 90
+    }
+}
+\def\sun #1 {%
+    \repeat 9 {%
+        \ray #1
+        \right 160
+    }
 }
 \vskip 70pt
-\begturtle
-    \circle 1
-\endturtle
+\turtleline{\circles, \flower 1, \sun 0.3, }
+
+
+\vskip 70pt
+Some poligons
+\def\poly #1 #2 #3 {%
+    \tmpnum=1
+    \edef\side{\expr{#1}}%
+    \edef\angle{\expr{#2}}
+    \def\polyiter {%
+        \forward {\side} 
+        \right {\angle}
+        \ifnum\tmpnum<#3 \advance\tmpnum by1
+            \ea\polyiter
+        \fi
+    }
+    \polyiter
+}
+
+\vskip 70pt
+\turtleline{\poly 50 72 5, \poly 30 60 6, \poly 50 144 5, \poly 70 135 8, \poly 60 108 10, }
 
 \bye

@@ -10,36 +10,30 @@
 \_def\.sumv#1#2{\expr{\.vecx#1+\.vecx#2} \expr{\.vecy#1+\.vecy#2} }
 \_def\.dir{\_cos{\.angle} \_sin{\.angle} }
 
-\_def\.strokecommand{S}
+\_def\.strokeoperator{S}
 \_def\.penup{%
-   \_def\.movecommand{m}%
-   \_pdfliteral{\.strokecommand}%
-   \_pdfliteral{Q}%
-}
+   \_def\.moveoperator{m}%
+   \_pdfliteral{\.strokeoperator}}
 \_def\.pendown{%
-   \_def\.movecommand{l}%
-   \_pdfliteral{\.vecx\.pos\_space\.vecy\.pos\_space m}%
-   \_pdfliteral{q}%
-}
+   \_def\.moveoperator{l}%
+   \_pdfliteral{\.vecx\.pos\_space\.vecy\.pos\_space m}}
 \_def\.pencap#1{\_pdfliteral{#1 j #1 J}}
 \_def\.pensize#1 {\_pdfliteral{#1 w}}
 
 \_def\.drawsegment#1#2{%
-   \_pdfliteral {#1 #2 \.movecommand}}
+   \_pdfliteral {#1 #2 \.moveoperator}}
 
 \_def\.forward#1 {%
    \_let\.startpos\.pos
    \_edef\.pos{\.sumv\.pos{\.scalev{#1}\.dir}}%
    \.drawsegment
       {\.vecx\.pos}
-      {\.vecy\.pos}%
-}
+      {\.vecy\.pos}}
 \_def\.left#1 {\_edef\.angle{\_expr{\.angle+#1}}}
 \_def\.back#1 {\.forward -(#1) }
 \_def\.right#1 {\.left -(#1) }
-\_def\.repeat#1 #2{\_fornum 1..#1 \_do{#2}}
 
-\_def\.begturtle{\_begingroup
+\_def\.bturtle{\_vbox\_bgroup
    \_let\forward\.forward
    \_let\back\.back
    \_let\right\.right
@@ -47,7 +41,6 @@
    \_let\penup\.penup
    \_let\pendown\.pendown
    \_let\pensize\.pensize
-   \_let\repeat\.repeat
    \_def\squarepen{\.pencap{0}}%
    \_def\roundpen{\.pencap{1}}%
    \_def\projectingpen{\.pencap{2}}%
@@ -57,12 +50,12 @@
    \pensize 1 
    \pendown
 }
-\_def\.endturtle{%
+\_def\.eturtle{%
    \.penup
-   \_endgroup
+   \_egroup
 }
 
-\_nspublic \begturtle \endturtle ;
+\_nspublic \bturtle \eturtle ;
 
 \_endnamespace
 \_endcode
