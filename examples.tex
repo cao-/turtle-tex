@@ -131,41 +131,32 @@ Circles and arcs
 \vskip 70pt
 \bigskip
 Some poligons
-\def\poly #1 #2 #3 {%
+\def\polycommon #1 #2 #3 #4 #5 {%
     \tmpnum=1
     \edef\side{\expr{#1}}%
     \edef\angle{\expr{#2}}%
-    \edef\n{\expr[0]{#3}}
+    \edef\n{\expr[0]{#5}}%
     \def\polyiter {%
-        \forward {\side} 
+        \forward {\side}
         \right {\angle}
-        \ifnum\tmpnum<\n \advance\tmpnum by1
+        \ifnum\tmpnum<\n
+            \advance\tmpnum by1
+            \edef\side{\expr{\side + #3}}%
+            \edef\angle{\expr{\angle + #4}}%
             \ea\polyiter
         \fi
-    }
+    }%
     \polyiter
 }
+
+\def\poly #1 #2 #3 {\polycommon #1 #2 0 0 #3 }
 
 \vskip 70pt
 \turtleline{\poly 50 72 5, \poly 30 60 6, \poly 50 144 5, \poly 70 135 8, \poly 60 108 10,} 
 
 \vfill\eject
 Outward pirals
-\def\polyspi #1 #2 #3 {%
-    \tmpnum=1
-    \edef\side{\expr{#1}}%
-    \edef\angle{\expr{#2}}%
-    \edef\n{\expr[0]{#3}}
-    \def\polyiter {%
-        \forward {\side} 
-        \right {\angle}
-        \ifnum\tmpnum<\n \advance\tmpnum by1
-            \edef\side{\expr{\side+#1}}
-            \ea\polyiter
-        \fi
-    }
-    \polyiter
-}
+\def\polyspi #1 #2 #3 {\polycommon #1 #2 #1 0 #3 }
 
 \vskip 50pt
 \turtleline{\polyspi 1.5 95 50, \polyspi 2 90 50, \polyspi 4 120 30, \polyspi 2 117 50,} 
@@ -173,25 +164,10 @@ Outward pirals
 \bigskip
 \vskip 50pt
 Inward spirals
-\def\inspi #1 #2 #3 #4 {%
-    \tmpnum=1
-    \edef\side{\expr{#1}}%
-    \edef\angle{\expr{#2}}%
-    \edef\n{\expr[0]{#4}}
-    \def\polyiter {%
-        \forward {\side} 
-        \right {\angle}
-        \ifnum\tmpnum<\n \advance\tmpnum by1
-            \edef\angle{\expr{\angle+#3}}
-            \ea\polyiter
-        \fi
-    }
-    \polyiter
-}
+\def\inspi #1 #2 #3 #4 {\polycommon #1 #2 0 #3 #4 }
+
 
 \vskip 50pt
 \turtleline{\inspi 4 0 7 540, \inspi 10 40 30 72, \inspi 10 2 20 90, \inspi 7 1 5 720,}
-
-
 
 \bye
