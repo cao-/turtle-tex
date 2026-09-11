@@ -26,9 +26,7 @@
 \_def\.forward#1 {%
    \_let\.startpos\.pos
    \_edef\.pos{\.sumv\.pos{\.scalev{#1}\.dir}}%
-   \.drawsegment
-      {\.vecx\.pos}
-      {\.vecy\.pos}}
+   \.drawsegment{\.vecx\.pos}{\.vecy\.pos}}
 \_def\.left#1 {\_edef\.angle{\_expr{\.angle+#1}}}
 \_def\.back#1 {\.forward -(#1) }
 \_def\.right#1 {\.left -(#1) }

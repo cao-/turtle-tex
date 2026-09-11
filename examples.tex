@@ -7,7 +7,7 @@
 
 \def\repeat#1 #2 {\fornum 1..#1 \do{#2}}
 
-\def\turtleline #1{\line{\foreach #1\do ##1, {\bturtle ##1 \eturtle \hfil}}}
+\def\turtleline #1{\line{\foreach #1\do ##1,{\bturtle ##1 \eturtle \hfil}}}
 
 Basic sequence of turtle movements
 \vskip 110pt
@@ -39,7 +39,7 @@ Squares and rectangles
 }
 
 \vskip 110pt
-\turtleline{\square 100, \rectangle 100 50, }
+\turtleline{\square 100, \rectangle 100 50,}
 
 \bigskip
 Some things
@@ -79,7 +79,7 @@ Some things
     }
 }
 \vskip 50pt
-\turtleline{\thing, \thingone, \thingtwo, \thingthree, }
+\turtleline{\thing, \thingone, \thingtwo, \thingthree,}
 
 \bigskip
 Circles and arcs
@@ -126,7 +126,7 @@ Circles and arcs
     }
 }
 \vskip 70pt
-\turtleline{\circles, \flower 1, \sun 0.3, }
+\turtleline{\circles, \flower 1, \sun 0.3,}
 
 
 \vskip 70pt
@@ -134,11 +134,12 @@ Some poligons
 \def\poly #1 #2 #3 {%
     \tmpnum=1
     \edef\side{\expr{#1}}%
-    \edef\angle{\expr{#2}}
+    \edef\angle{\expr{#2}}%
+    \edef\n{\expr[0]{#3}}
     \def\polyiter {%
         \forward {\side} 
         \right {\angle}
-        \ifnum\tmpnum<#3 \advance\tmpnum by1
+        \ifnum\tmpnum<\n \advance\tmpnum by1
             \ea\polyiter
         \fi
     }
@@ -146,6 +147,11 @@ Some poligons
 }
 
 \vskip 70pt
-\turtleline{\poly 50 72 5, \poly 30 60 6, \poly 50 144 5, \poly 70 135 8, \poly 60 108 10, }
+\turtleline{\poly 50 72 5, \poly 30 60 6, \poly 50 144 5, \poly 70 135 8, \poly 60 108 10,} 
+
+\vskip 100pt
+\bturtle
+\poly 0.1 0.1 360/0.1
+\eturtle
 
 \bye
