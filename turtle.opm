@@ -6,7 +6,7 @@
 \_def\.vecxA#1 #2 {#1}
 \_def\.vecy#1{\_ea\.vecyA#1}
 \_def\.vecyA#1 #2 {#2}
-\_def\.scalev#1#2{\expr{#1*\.vecx#2} \expr{#1*\.vecy#2} }
+\_def\.scalev#1#2{\expr{(#1)*\.vecx#2} \expr{(#1)*\.vecy#2} }
 \_def\.sumv#1#2{\expr{\.vecx#1+\.vecx#2} \expr{\.vecy#1+\.vecy#2} }
 \_def\.dir{\_cos{\.angle} \_sin{\.angle} }
 
