@@ -1,11 +1,11 @@
 \load[turtle]
-\pdfcompresslevel=0
-\pdfobjcompresslevel=0
+%\pdfcompresslevel=0
+%\pdfobjcompresslevel=0
 
 \parindent=0pt
 
 
-\def\repeat#1 #2 {\fornum 1..#1 \do{#2}}
+\def\repeat#1 #2{\fornum 1..#1 \do{#2}}
 
 \def\turtleline #1{\line{\foreach #1\do ##1,{\bturtle ##1 \eturtle \hfil}}}
 
@@ -29,14 +29,12 @@ Squares and rectangles
 \def\square #1 {%
     \repeat 4 {%
         \squarepiece #1
-    }
-}
+    }}
 \def\rectangle #1 #2 {%
     \repeat 2 {%
         \squarepiece #1
         \squarepiece #2
-    }
-}
+    }}
 
 \vskip 110pt
 \turtleline{\square 100, \rectangle 100 50,}
@@ -69,15 +67,13 @@ Some things
         \thing
         \right 10
         \forward 10
-    }
-}
+    }}
 \def\thingthree {%
     \repeat 8 {%
         \thing
         \left 45
         \forward 20
-    }
-}
+    }}
 \vskip 50pt
 \turtleline{\thing, \thingone, \thingtwo, \thingthree,}
 
@@ -87,44 +83,37 @@ Circles and arcs
     \repeat #2 {%
         \forward #1
         \right 1 
-    }
-}
+    }}
 \def\arcl #1 #2 {%
     \repeat #2 {%
         \forward #1
         \left 1 
-    }
-}
+    }}
 \def\circles {%
     \repeat 9 {%
         \arcr 0.5 360
         \right 40
-    }
-}
+    }}
 \def\petal #1 {%
     \repeat 2 {%
         \arcr #1 60
         \right 120
-    }
-}
+    }}
 \def\flower #1 {%
     \repeat 6 {%
         \petal #1
         \right 60
-    }
-}
+    }}
 \def\ray #1 {%
     \repeat 2 {%
         \arcl #1 90
         \arcr #1 90
-    }
-}
+    }}
 \def\sun #1 {%
     \repeat 9 {%
         \ray #1
         \right 160
-    }
-}
+    }}
 \vskip 70pt
 \turtleline{\circles, \flower 1, \sun 0.3,}
 
